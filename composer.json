@@ -1,0 +1,17 @@
+{
+    "name": "elic-dev/database-blob-file",
+    "type": "cakephp-plugin",
+    "description": "Store uploads from cakephp as blob/binary in the database",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthias Lill",
+            "email": "m.lill@gmx.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "composer/installers": "*"
+    },
+}
