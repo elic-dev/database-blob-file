@@ -22,7 +22,7 @@ class BlobFileController extends DatabaseBlobFileAppController {
 
 		$dataset = $this->{$model}->find('first',array(
 			'conditions' => array(
-				$this->{$model}->primaryKey => intval($id)
+				$model.'.'.$this->{$model}->primaryKey => intval($id)
 			),
 			'fields' => array($field),
 		));

@@ -19,7 +19,7 @@ Configure::write(
 			'md7' => array('resize',653),
 			'md8' => array('resize',750),
 			'md9' => array('resize',858),
-			'md10' => array('resize',954),
+			'md10' => array('resize',945),
 			'md11' => array('resize',1043),
 			'md12' => array('resize',1170),
 		),
