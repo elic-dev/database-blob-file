@@ -102,6 +102,24 @@ class BlobFileHandler {
 				$this->resource = $dstImg;
 			
 				break;
+			case 'resizewidth':
+				# Maintains aspect ratio but resizes the image so that the Width
+				# has to fit. We don't care about the height.
+				# get ratio
+				$ratioX = $maxScale / $uploadWidth;
+
+				$newX = $maxScale;
+				$newY = ceil($ratioX * $uploadHeight);
+
+				$dstImg = imagecreatetruecolor($newX,$newY);
+				imagealphablending($dstImg, false);
+ 				imagesavealpha($dstImg,true);
+				$transparent = imagecolorallocatealpha($dstImg, 255, 255, 255, 127);
+ 				imagefilledrectangle($dstImg, 0, 0, $newX, $newY, $transparent);
+				imagecopyresampled($dstImg, $this->resource, 0, 0, 0, 0, $newX, $newY, $uploadWidth, $uploadHeight);
+				$this->resource = $dstImg;
+			
+				break;
 			case 'resizecrop':
 				// -- resize to max, then crop to center
 				$ratioX = $maxW / $uploadWidth;
