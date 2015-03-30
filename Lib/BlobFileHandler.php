@@ -181,6 +181,9 @@ class BlobFileHandler {
 			default: $this->error ("File type must be GIF, PNG, or JPG to resize");
 		}
 
+		// rotate source image based on exif-orientation
+		$this->fixImageRotation($filename);
+
 	}
 
 	public function loadFromString($string) {
@@ -298,6 +301,29 @@ class BlobFileHandler {
 		}
 
 		return imagesx($this->resource);		
+	}
+
+	protected function fixImageRotation($filename) {
+
+		if (! function_exists("exif_read_data")) {
+			return;
+		}
+
+		$exif = exif_read_data($filename);
+
+		if (!empty($exif['Orientation'])) {
+			switch ($exif['Orientation']) {
+				case 3:
+					$this->resource = imagerotate($this->resource, 180, 0);
+					break;
+				case 6:
+					$this->resource = imagerotate($this->resource, -90, 0);
+					break;
+				case 8:
+					$this->resource = imagerotate($this->resource, 90, 0);
+					break;
+			}
+		}
 	}
 
 }

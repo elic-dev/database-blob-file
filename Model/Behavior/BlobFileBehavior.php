@@ -67,7 +67,7 @@ class BlobFileBehavior extends ModelBehavior {
 
 	public function isUploadedFileImage($model,$params) {
 
-	    $val = array_shift($params);
+		$val = array_shift($params);
 
 		if ( ! empty($val['name']) and empty($val['tmp_name'])) {
 			return false;
@@ -77,10 +77,10 @@ class BlobFileBehavior extends ModelBehavior {
 			return true; // allow empty value
 		}
 
-	    $fileHandler = new BlobFileHandler;
-	    $fileHandler->loadFromFile($val['tmp_name']);
+		$fileHandler = new BlobFileHandler;
+		$fileHandler->loadFromFile($val['tmp_name']);
 
-	    return $fileHandler->isImage();
+		return $fileHandler->isImage();
 	}
 
 }
