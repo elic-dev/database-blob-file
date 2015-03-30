@@ -20,6 +20,14 @@ class BlobFileController extends DatabaseBlobFileAppController {
 		$modified = substr($size, 0,10);
 		$size     = substr($size, 10);
 
+		if ( ! class_exists($model)) {
+			throw new NotFoundException($model.' does not exist');
+		}
+
+		if (! $this->{$model}->hasField($field)) {
+			throw new NotFoundException($field.' field does not exist');
+		}
+
 		$dataset = $this->{$model}->find('first',array(
 			'conditions' => array(
 				$model.'.'.$this->{$model}->primaryKey => intval($id)
