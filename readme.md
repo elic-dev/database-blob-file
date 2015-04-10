@@ -53,6 +53,32 @@ You will have a new virtual field containing a base path to the file (will be re
 
 	<?php echo $this->Html->image($model['Table']['columnname_basepath'].'size.jpg')
 
+## Output images in different sizes
+
+### resize
+
+Maintains the aspect ration of the image and makes sure that it fits within the new max width and max height (thus some side will be smaller).
+
+### resizefit
+
+Maintains the aspect ration of the image and makes sure that it fits inside the new width and height. Extra space will be filled with white color.
+
+### resizewidth
+
+Maintains aspect ratio but resizes the image so that the Width has to fit. We don't care about the height.
+
+### resizemin
+
+Maintains aspect ratio but resizes the image so that once one side meets its maxW or maxH condition, it stays at that size (thus one side will be larger).
+
+### crop
+
+Simple center crop
+
+### resizecrop
+
+resize to max width and height, then crop to center
+
 ## Caching
 
 Every file which has been served once will be stored inside the webroot for caching with a timestamp. This is supposed to work with a deployment processes which resets the app folder to its correct state with every deployment.

@@ -146,6 +146,32 @@ class BlobFileHandler {
 				$this->resource = $dstImg;
 		
 				break;
+			case 'resizefit':
+				# Maintains the aspect ration of the image and makes sure that it fits
+				$newX = $maxW;
+				$newY = round($newX*($uploadHeight/$uploadWidth));
+				$new_x = 0;
+				$new_y = round(($maxH-$newY)/2);
+
+				// FILL and FIT mode are mutually exclusive
+				$next = $newY > $maxH;
+
+				// If match by width failed and destination image does not fit, try by height 
+				if ($next) {
+					$newY = $maxH;
+					$newX = round($newY*($uploadWidth/$uploadHeight));
+					$new_x = round(($maxW - $newX)/2);
+					$new_y = 0;
+				}
+				$dstImg = imagecreatetruecolor($maxW, $maxH);
+				imagefill($dstImg, 0, 0, imagecolorallocate($dstImg, 255, 255, 255));
+				imagealphablending($dstImg, false);
+ 				imagesavealpha($dstImg,true);
+				$transparent = imagecolorallocatealpha($dstImg, 255, 255, 255, 127);
+ 				imagefilledrectangle($dstImg, 0, 0, $newX, $newY, $transparent);
+				imagecopyresampled($dstImg, $this->resource, $new_x, $new_y, 0, 0, $newX, $newY, $uploadWidth, $uploadHeight);
+				$this->resource = $dstImg;
+				break;
 			case 'crop':
 				// -- a straight centered crop
 				$startY = ($uploadHeight - $maxH)/2;

@@ -50,7 +50,7 @@ class BlobFileController extends DatabaseBlobFileAppController {
 				$sizes[pathinfo($size,PATHINFO_FILENAME)][1]);
 		}
 
-		switch (pathinfo($size,PATHINFO_EXTENSION)) {
+		switch (strtolower(pathinfo($size,PATHINFO_EXTENSION))) {
 			case 'jpg':
 			case 'jpeg':
 				$file = $fileHandler->store(null,IMAGETYPE_JPEG,90);
