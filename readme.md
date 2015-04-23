@@ -8,6 +8,8 @@ If you still consider that all uploaded files __have to be__ stored in the files
 
 ## Install
 
+This Plugin requires CakePHP 2.
+
 ### Enable Plugin
 
 Enable to plugin in your bootstrap.php file. Routes are required for serving uploaded files via http.
