@@ -335,7 +335,12 @@ class BlobFileHandler {
 			return;
 		}
 
-		$exif = exif_read_data($filename);
+		// exif fails when image is corrupt
+		$exif = @exif_read_data($filename);
+
+		if (!is_array($exif)) {
+			return;
+		}
 
 		if (!empty($exif['Orientation'])) {
 			switch ($exif['Orientation']) {
