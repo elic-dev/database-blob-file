@@ -48,6 +48,14 @@ class BlobFileController extends DatabaseBlobFileAppController {
 			$fileHandler->modify(
 				$sizes[pathinfo($size,PATHINFO_FILENAME)][0],
 				$sizes[pathinfo($size,PATHINFO_FILENAME)][1]);
+
+			// filter
+			if (isset($sizes[pathinfo($size,PATHINFO_FILENAME)][2])
+				and is_array($sizes[pathinfo($size,PATHINFO_FILENAME)][2])) {
+				foreach ($sizes[pathinfo($size,PATHINFO_FILENAME)][2] as $filter) {
+					$fileHandler->filter($filter);
+				}
+			}
 		}
 
 		switch (strtolower(pathinfo($size,PATHINFO_EXTENSION))) {

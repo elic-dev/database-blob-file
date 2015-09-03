@@ -190,6 +190,23 @@ class BlobFileHandler {
 		}	
 	}
 
+	public function filter($options = array()) {
+
+		if (!isset($options['type'])) {
+			return;
+		}
+
+		// sharpen image using the filter unsharpen function with some default values
+		if ($options['type'] == 'sharpen') {
+
+			App::uses('BlobImageFilter','DatabaseBlobFile.Lib');
+
+			BlobImageFilter::unsharpMask($this->resource,60,0.5,2);
+		}
+
+		// var_dump($options);exit;	
+	}
+
 	public function loadFromFile($filename) {
 
 		$this->resourceInfo = getimagesize($filename);
