@@ -22,8 +22,9 @@ class BlobFileBehavior extends ModelBehavior {
 
 		foreach ($columns as $field => $type) {
 			if ($type == 'binary') {
+				$cdnHost = Configure::read('DatabaseBlobFile.cdn_host');
 				$model->virtualFields[$field] = 'LENGTH('.$model->name.'.'.$field.')';
-				$model->virtualFields[$field.'_basepath'] = "CONCAT('/file/','".$model->name."','/',".$model->name.'.'.$model->primaryKey.",'/','".$field."','/', date_format(".$model->name.".modified,'%y%m%d%h%i'))";
+				$model->virtualFields[$field.'_basepath'] = "CONCAT('".$cdnHost."/file/','".$model->name."','/',".$model->name.'.'.$model->primaryKey.",'/','".$field."','/', date_format(".$model->name.".modified,'%y%m%d%h%i'))";
 			}
 		}
 		return $query;

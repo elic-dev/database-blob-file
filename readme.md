@@ -85,6 +85,10 @@ resize to max width and height, then crop to center
 
 Every file which has been served once will be stored inside the webroot for caching with a timestamp. This is supposed to work with a deployment processes which resets the app folder to its correct state with every deployment.
 
+### Cache using CDN
+
+You can set a CDN host address inside your config file. This will reduce request to your server and files stored inside your webroot.
+
 ## Roadmap
 
 - Support for more file types than just images

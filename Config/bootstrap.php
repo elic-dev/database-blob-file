@@ -7,9 +7,10 @@
  *
  */
 Configure::write(
-    'DatabaseBlobFile',
-    array(
-        'sizes' => array(
+	'DatabaseBlobFile',
+	array(
+		'cdn_host' => '',
+		'sizes' => array(
 			'md1' => array('resizewidth',67),
 			'md2' => array('resizewidth',165),
 			'md3' => array('resizewidth',263),
@@ -23,5 +24,5 @@ Configure::write(
 			'md11' => array('resizewidth',1043),
 			'md12' => array('resizewidth',1170),
 		),
-    )
+	)
 );
