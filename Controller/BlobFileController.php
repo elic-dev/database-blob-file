@@ -35,6 +35,10 @@ class BlobFileController extends DatabaseBlobFileAppController {
 			'fields' => array($field),
 		));
 
+		if (empty($dataset)) {
+			throw new NotFoundException('File does not exist');
+		}
+
 		$fileHandler = new BlobFileHandler;
 		$fileHandler->loadFromString($dataset[$model][$field]);
 
@@ -77,7 +81,9 @@ class BlobFileController extends DatabaseBlobFileAppController {
 		}
 
 		// copy file to webroot for better caching
-		if ( ! is_dir(WWW_ROOT.pathinfo($this->request->url,PATHINFO_DIRNAME))) {
+		if ( ! is_dir(WWW_ROOT.pathinfo($this->request->url,PATHINFO_DIRNAME))
+			and ! file_exists(WWW_ROOT.pathinfo($this->request->url,PATHINFO_DIRNAME))
+			) {
 			mkdir(WWW_ROOT.pathinfo($this->request->url,PATHINFO_DIRNAME),0777,true);
 		}
 		file_put_contents(WWW_ROOT.$this->request->url, $file);
