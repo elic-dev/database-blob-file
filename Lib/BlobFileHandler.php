@@ -5,6 +5,20 @@ class BlobFileHandler {
 	public $resource;
 	public $resourceInfo;
 
+	public function __construct() {
+
+		/**
+		 * processing images may need more resources than an avereage page request
+		 */
+		if (Configure::read('DatabaseBlobFile.memory_limit')) {
+			ini_set('memory_limit', Configure::read('DatabaseBlobFile.memory_limit'));
+		}
+
+		if (Configure::read('DatabaseBlobFile.execution_time')) {
+	    	set_time_limit(Configure::read('DatabaseBlobFile.execution_time'));
+		}
+
+	}
 	
 	/**
 	 * add a message to stack (for outside checking)

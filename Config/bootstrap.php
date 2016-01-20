@@ -5,11 +5,14 @@
  * PHP 5
  * CakePHP 2
  *
+ * @todo place in own config file Config/databaseblobfile.php
  */
 Configure::write(
 	'DatabaseBlobFile',
 	array(
 		'cdn_host' => '',
+		'memory_limit' => null, // eg '128M' or '1024M'
+		'execution_time' => null, // eg 300
 		'sizes' => array(
 			'md1' => array('resizewidth',67),
 			'md2' => array('resizewidth',165),
