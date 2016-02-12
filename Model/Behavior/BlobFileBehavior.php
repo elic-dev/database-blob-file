@@ -71,6 +71,12 @@ class BlobFileBehavior extends ModelBehavior {
 		$val = array_shift($params);
 
 		if ( ! empty($val['error'])) {
+			
+			// no file uploaded
+			if ($val['error'] == 4) {
+				return true;
+			}
+
 			return $this->errorCodeToMessage($val['error']);
 		}
 
